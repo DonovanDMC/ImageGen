@@ -23,6 +23,11 @@ REDIS_DB = config.get('redis_db', 1)
 def get_db():
     if 'rdb' not in g:
         g.rdb = r.connect(RDB_ADDRESS, RDB_PORT, db=RDB_DB, password=RDB_PASSWORD)
+        if not r.db_list().contains(RDB_DB).run(g.rdb):
+            r.db_create(RDB_DB).run(g.rdb)
+        for table in ['applications', 'keys']:      
+            if not r.db(RDB_DB).table_list().contains(table).run(g.rdb):
+                r.db(RDB_DB).table_create(table).run(g.rdb)
     return g.rdb
 
 
