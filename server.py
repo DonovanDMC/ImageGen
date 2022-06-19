@@ -85,7 +85,7 @@ def stats():
     data = {}
 
     for endpoint in endpoints:
-        data[endpoint] = {'hits': get_redis().get(endpoint + ':hits') or 0,
+        data[endpoint] = {'hits': int(get_redis().get(endpoint + ':hits') or 0),
                           'avg_gen_time': endpoints[endpoint].get_avg_gen_time()}
 
     return render_template('stats.html', data=data, active_stats="nav-active")

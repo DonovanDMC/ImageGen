@@ -13,11 +13,13 @@
         <th onclick="sortTable(2)">Avg. Gen Time</th>
       </tr>
       {% for ep in data %}
+      {% if data[ep]["hits"] > 0 %}
       <tr>
         <td>{{ep}}</td>
         <td>{{data[ep]["hits"]}} hits</td>
         <td>{{data[ep]["avg_gen_time"]}} ms</td>
       </tr>
+      {% endif %}
       {% endfor %}
     </table>
   </div>
