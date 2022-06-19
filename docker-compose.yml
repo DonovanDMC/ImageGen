@@ -2,6 +2,8 @@ services:
   imgen:
     build: .
     container_name: imgen
+    volumes:
+      - ./:/app
     restart: always
     healthcheck:
       interval: 10s

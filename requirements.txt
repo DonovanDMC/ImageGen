@@ -13,3 +13,6 @@ keras
 scipy
 gevent
 tensorflow
+hiredis
+pillow-simd
+ujson
