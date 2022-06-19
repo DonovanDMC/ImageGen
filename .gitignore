@@ -104,3 +104,6 @@ keys.json
 config.json
 
 .idea/
+
+#db
+data/

@@ -1,0 +1,54 @@
+services:
+  imgen:
+    build: .
+    container_name: imgen
+    restart: always
+    healthcheck:
+      interval: 10s
+      timeout: 2s
+      test: lsof -i :1337 || exit 1
+    depends_on:
+      rethinkdb:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    hostname: imgen.containers.local
+    networks:
+      default:
+        ipv4_address: 172.19.1.10
+  rethinkdb:
+    image: rethinkdb
+    command: rethinkdb --bind all -n rdb
+    container_name: rethinkdb.imgen
+    volumes:
+      - ./data/db:/data
+    restart: always
+    hostname: rethinkdb.imgen.containers.local
+    networks:
+      default:
+        ipv4_address: 172.19.1.11
+  redis:
+    image: redis:alpine
+    command: redis-server --disable-thp yes --supervised no --bind 0.0.0.0 --protected-mode no
+    container_name: redis.imgen
+    volumes:
+      - ./data/redis:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 10s
+      timeout: 5s
+    restart: always
+    hostname: redis.imgen.containers.local
+    networks:
+      default:
+        ipv4_address: 172.19.1.12
+
+networks:
+  default:
+    name: imgen
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.1.8/29
+          gateway: 172.19.1.9
