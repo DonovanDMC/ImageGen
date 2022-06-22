@@ -1,15 +1,2 @@
-# meme-server
-The microservice that powers [Dank Memer's](https://goo.gl/HL3zBi) Image Generation.
-
-View a live instance [here](https://dankmemer.services)
-
-# Starting meme-server
-install rethinkdb [here](https://github.com/rethinkdb/rethinkdb) and get that running
-
-```bash
-git clone
-cd meme-server
-./start.sh
-```
-
-You can use this in conjunction with pm2 or tmux to ensure it runs after exiting the SSH session.
+# Image Gen
+A public and free to use fork of DankMemer's [imgen](https://github.com/DankMemer/imgen). You can apply for a key on our instance [here](https://imgen.yiff.rest), or spin up an instance yourself by simply starting the docker setup.
