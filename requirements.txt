@@ -16,3 +16,4 @@ tensorflow
 hiredis
 pillow-simd
 ujson
+newrelic
